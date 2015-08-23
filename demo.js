@@ -16,6 +16,7 @@
         drawScreen: drawScreen,
         drawBackground: drawBackground,
         drawCircle: drawCircle,
+        drawSquare: drawSquare,
         mouseDown: mouseDown,
         mouseMove: mouseMove,
         mouseUp: mouseUp
@@ -50,6 +51,7 @@
 
     function drawScreen() {
         Demo.drawBackground();
+        Demo.drawSquare();
         Demo.drawCircle();
     }
 
@@ -74,6 +76,21 @@
         context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
         context.closePath();
         context.fill();
+    }
+
+    function drawSquare() {
+        var canvas = Demo.get('canvas');
+        var context = Demo.get('context');
+
+        var canvasWidth = canvas.width;
+        var canvasHeight = canvas.height;
+        var width = 500;
+        var height = 500;
+        var x = (canvasWidth - width) / 2;
+        var y = (canvasHeight - height) / 2;
+
+        context.fillStyle = '#aaa';
+        context.fillRect(x, y, width, height);
     }
 
     function mouseDown(event) {
