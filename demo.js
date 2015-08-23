@@ -170,7 +170,7 @@
         circle.y = posY;
 
         Demo.set('circle', circle);
-        drawScreen();
+        Demo.drawScreen();
     }
 
 })();
