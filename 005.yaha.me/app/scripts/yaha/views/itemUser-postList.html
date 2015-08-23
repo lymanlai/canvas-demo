@@ -1,0 +1,28 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      {{'The List'|i18n}}
+    </h3>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>{{'Title'|i18n}}</th>
+        <th>{{'Time'|i18n}}</th>
+        <th>{{'Comments'|i18n}}</th>
+        <th>{{'ThumbsUp'|i18n}}</th>
+        <th>{{'ThumbsDown'|i18n}}</th>
+      </tr>
+      <tr ng-repeat="post in postList track by $index ">
+        <td><a ui-sref="yaha.item({id:post.id})">{{post.title}}</a></td>
+        <td><span am-time-ago="post.createDate"></span></td>
+        <td>{{post.commentCount}}</td>
+        <td>{{post.thumbsUpCount}}</td>
+        <td>{{post.thumbsDownCount}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="panel-footer" ng-if="isEditAbled">
+    <a ui-sref="yaha.add" class="btn btn-primary">{{'Add'|i18n}}</a>
+  </div>
+</div>

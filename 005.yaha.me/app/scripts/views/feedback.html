@@ -1,0 +1,12 @@
+<div class="form-wrap">
+  <div class="login-form">
+  <form name="form" novalidate ng-submit="form.$valid && submit()">
+    <div class="form-group ng-class:{'has-error':form.message.$invalid}">
+      <textarea class="form-control" name="message" ng-model="message" value="" placeholder="{{'Feedback Message'|i18n}}"  autofocus required></textarea>
+      <span class="help-block" ng-show="form.message.$dirty && form.message.$error.required">{{'Please input your feedback message'|i18n}}</span>
+    </div>
+
+    <button class="btn btn-primary btn-large btn-block" type="submit" ng-disabled="form.$invalid">{{'Submit'|i18n}}</button>
+  </form>
+  </div>
+</div>

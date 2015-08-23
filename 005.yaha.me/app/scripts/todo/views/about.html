@@ -1,0 +1,80 @@
+<div class="jumbotron">
+  <h3>{{'YaHa Perfectionism!'|i18n}}</h3>
+  <p>
+    {{'Fancy & Cool'|i18n}}  
+  </p>
+  <h4>
+    {{"No one Born With Perfect, Let's Born To Perfect!"|i18n}}
+  </h4>
+  <!-- <a ng-if="!hasPermission('user')" ui-sref="signup" class="btn btn-primary">{{'Join Now!'|i18n}}</a> -->
+</div>
+
+<div class="row text-center">
+  <div class="col-xs-12 col-sm-12">
+    <div class="panel panel-info">
+      <div class="panel-heading">{{'荣誉版'|i18n}}</div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          无需付费
+        </li>
+        <li class="list-group-item">永久免费使用</li>
+        <li class="list-group-item">
+          <a href="" ng-click="showPayA = !showPayA" ng-show="!showPayA" class="btn btn-primary">立即使用</a>
+          <ol ng-show="showPayA" class="text-left">
+            <li>你已经下定决心克服拖延症，成为完美主义者</li>
+            <li>保证每天使用至少一次</li>
+            <li>使用过程中对我们提出改进意见</li>
+            <li>加入荣誉版官方QQ群:335099121 (注明：YaHa完美主义)</li>
+            <li>每日与其他荣誉会员互相鞭策提高自己的工作学习效率</li>
+            <li>在微博或豆瓣上帮助宣传我们</li>
+          </ol>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">{{'年付版'|i18n}}</div>
+      <ul class="list-group">
+        <li class="list-group-item">付费 99.9 元</li>
+        <li class="list-group-item">使用期限一年</li>
+        <li class="list-group-item">
+          <a href="" ng-click="showPayB = !showPayB" ng-show="!showPayB" class="btn btn-primary">立即购买</a>
+          <div ng-show="showPayB">
+            付款金额: 99.9 <br />
+            付款说明: QQ号 <br />
+            <a href="https://me.alipay.com/lymanlai" target="_blank" class="btn btn-danger">
+              去付款
+              <i class="fa fa-external-link"></i>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="col-xs-12 col-sm-6">
+    <div class="panel panel-info">
+      <div class="panel-heading">{{'月付版'|i18n}}</div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          付费 19.9 元
+        </li>
+        <li class="list-group-item">使用期限一月</li>
+        <li class="list-group-item">
+          <a href="" ng-click="showPayC = !showPayC" ng-show="!showPayC" class="btn btn-primary">立即购买</a>
+          <div ng-show="showPayC">
+            付款金额: 19.9 <br />
+            付款说明: QQ号 <br />
+            <a href="https://me.alipay.com/lymanlai" target="_blank" class="btn btn-danger">
+              去付款
+              <i class="fa fa-external-link"></i>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

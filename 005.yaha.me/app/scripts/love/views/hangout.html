@@ -1,0 +1,27 @@
+<div class="text-center clearfix">
+  <div class="pull-left">
+    <button type="button" class="btn btn-primary fa fa-map-marker" ng-click="$state.transitionTo('love.changeLocation');"> {{location}}</button>
+  </div>
+  <div class="pull-right">
+    <a href="#/love/hangout/new" class="btn btn-primary fa fa-pencil"> {{'New Hangout'|i18n}}</a>
+  </div>
+</div>
+
+<div class="text-center" ng-show="noHangoutYet">
+  <h3>{{'Do not have any hangout yet, you can add a new one now!'|i18n}}</h3>
+  <a href="#/love/hangout/new" class="btn btn-primary fui-new"> {{'New Hangout'|i18n}}</a>
+</div>
+
+<ul class="list">
+  <li ng-repeat="item in items">
+    [{{item.hangoutStartTime}}]
+    <a ng-href="#/love/hangout/{{item.id}}" class="title">{{item.title}}</a>
+    <span class="pull-right">
+      <i class="fa fa-male"> {{item.alreadyJoinCount.male}} </i>
+      &nbsp;
+      <i class="fa fa-female"> {{item.alreadyJoinCount.female}} </i>
+    </span>
+    <div class="clearfix"></div>
+  </li>
+</ul>
+

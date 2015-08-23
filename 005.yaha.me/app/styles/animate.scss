@@ -1,0 +1,90 @@
+.bounceInDownOut{
+  -webkit-animation: bounceInDown 1s; /* Safari/Chrome */
+  -moz-animation: bounceInDown 1s; /* Firefox */
+  -o-animation: bounceInDown 1s; /* Opera */
+  animation: bounceInDown 1s; /* IE10+ and Future Browsers */
+}
+
+.bounceInDownOut.ng-hide-add {
+  -webkit-animation: bounceOut 1s; /* Safari/Chrome */
+  -moz-animation: bounceOut 1s; /* Firefox */
+  -o-animation: bounceOut 1s; /* Opera */
+  animation: bounceOut 1s; /* IE10+ and Future Browsers */
+}
+
+.bounceInDownOut.ng-hide-add,
+.bounceInDownOut.ng-hide-remove {
+  display:block!important;
+}
+
+.fadeInOut{
+  -webkit-animation: fadeIn 1s; /* Safari/Chrome */
+  -moz-animation: fadeIn 1s; /* Firefox */
+  -o-animation: fadeIn 1s; /* Opera */
+  animation: fadeIn 1s; /* IE10+ and Future Browsers */
+}
+
+.fadeInOut.ng-hide-add {
+  -webkit-animation: fadeOut 1s; /* Safari/Chrome */
+  -moz-animation: fadeOut 1s; /* Firefox */
+  -o-animation: fadeOut 1s; /* Opera */
+  animation: fadeOut 1s; /* IE10+ and Future Browsers */
+}
+
+.fadeInOut.ng-hide-add,
+.fadeInOut.ng-hide-remove {
+  display:block!important;
+}
+
+.fadeInOutLeft{
+  -webkit-animation: fadeInLeft 1s; /* Safari/Chrome */
+  -moz-animation: fadeInLeft 1s; /* Firefox */
+  -o-animation: fadeInLeft 1s; /* Opera */
+  animation: fadeInLeft 1s; /* IE10+ and Future Browsers */
+}
+
+.fadeInOutLeft.ng-hide-add {
+  -webkit-animation: fadeOutLeft 1s; /* Safari/Chrome */
+  -moz-animation: fadeOutLeft 1s; /* Firefox */
+  -o-animation: fadeOutLeft 1s; /* Opera */
+  animation: fadeOutLeft 1s; /* IE10+ and Future Browsers */
+}
+
+.fadeInOutLeft.ng-hide-add,
+.fadeInOutLeft.ng-hide-remove {
+  display:block!important;
+}
+
+.fadeInLeftBounceOut{
+  &.ng-enter {
+    -webkit-animation: fadeInLeft 1s;
+    -moz-animation: fadeInLeft 1s;
+    -ms-animation: fadeInLeft 1s;
+    animation: fadeInLeft 1s;
+  }
+  &.ng-leave {
+    -webkit-animation: bounceOut 1s;
+    -moz-animation: bounceOut 1s;
+    -ms-animation: bounceOut 1s;
+    animation: bounceOut 1s;
+  }
+}
+
+.slideDownUp{
+  -webkit-animation: slideInDown 1s; /* Safari/Chrome */
+  -moz-animation: slideInDown 1s; /* Firefox */
+  -o-animation: slideInDown 1s; /* Opera */
+  animation: slideInDown 1s; /* IE10+ and Future Browsers */
+}
+
+.slideDownUp.ng-hide-add {
+  -webkit-animation: slideOutUp 1s; /* Safari/Chrome */
+  -moz-animation: slideOutUp 1s; /* Firefox */
+  -o-animation: slideOutUp 1s; /* Opera */
+  animation: slideOutUp 1s; /* IE10+ and Future Browsers */
+}
+
+.slideDownUp.ng-hide-add,
+.slideDownUp.ng-hide-remove {
+  display:block!important;
+}

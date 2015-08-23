@@ -1,0 +1,106 @@
+<div class="avatar-grid">
+    <h1> {{data.title}} </h1>
+    <h4>         
+        {{data.hangoutDate}}  {{data.hangoutStartTime}}
+    </h4>
+
+    <br />
+
+    <div class="text-center" ng-hide="step == 6">
+      <i class="icon-male"> {{male.count}} </i> 
+      <span class="avatar-list-small" ng-bind-html-unsafe="male.str"></span> 
+      <br />
+      <br />
+      <i class="icon-female"> {{female.count}} </i> 
+      <span class="avatar-list-small" ng-bind-html-unsafe="female.str"></span>
+      <br />
+      <br />
+
+      <div class="pagination step-list">
+      <ul>
+        <li></li>
+        <li ng-class="{active: step == 1}"><a href="" >1</a></li>
+        <li><span class="fui-arrow-right"></span></li>
+        <li ng-class="{active: step == 2}"><a href="" >2</a></li>
+        <li><span class="fui-arrow-right"></span></li>
+        <li ng-class="{active: step == 3}"><a href="" >3</a></li>
+        <li><span class="fui-arrow-right"></span></li>
+        <li ng-class="{active: step == 4}"><a href="" >4</a></li>
+        <li><span class="fui-arrow-right"></span></li>
+        <li ng-class="{active: step == 5}"><a href="" >5</a></li>
+        <li></li>
+      </ul>
+      </div>
+
+      <div ng-show="step == 1">
+        <div ng-hide="showGenderSetup">
+          <button ng-click="joinHangout()" class="btn btn-primary icon-plus"> {{'Join hangout'|i18n}}</button>          
+        </div>
+        <div ng-show="showGenderSetup">
+          <button ng-click="setupGender('male')" class="btn btn-primary icon-male btn-info"> {{'I am male'|i18n}}</button>
+          <button ng-click="setupGender('female')" class="btn btn-primary icon-female btn-danger"> {{'I am female'|i18n}}</button>
+        </div>
+      </div>
+      <div ng-show="step == 2">
+        <button ng-click="enjoyHangout()"class="btn btn-primary fui-location"> {{'Enjoy hangout'|i18n}}</button>       
+      </div>
+      <div ng-show="step == 3">
+        <yh-uploader  class="btn btn-primary ladda-button fui-photo" button-text="{{' Upload your hangout photo'|i18n}}" field-name="hangoutPhoto"
+        action="{{uploadUrl}}" security-header-name="sid" security-header-value="{{sid}}" 
+        on-complete="uploadComplete" 
+      />
+      </div>
+      <div ng-show="step == 4">
+        <h3>{{'Make a comment for the hangout'|i18n}}</h3>
+        <form class="form-horizontal comment-form" name="form" novalidate ng-submit="addHangoutComment()">
+          <div class="form-group ng-class:{'has-error':form.text.$invalid}">
+            <label class="control-label" for="text">
+              <img class="avatar" alt="{{me.displayName}}" title="{{me.displayName}}" ng-src="{{avatarUrl(me.id)}}" />
+            </label>
+            <div class="controls">
+              <textarea id="text" name="text" ng-model="formData.title" placeholder="{{'Please add your hangout comment here'|i18n}}" yh-focus-by-over required ui-keydown="{'ctrl-enter':'addHangoutComment()'}"></textarea>
+              <span class="help-block" ng-show="form.text.$dirty && form.text.$error.required">{{'Please input your comment'|i18n}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="controls">
+              <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">{{'Submit'|i18n}}</button> (Ctrl+Enter)
+            </div>
+          </div>
+        </form>
+
+        <ul class="list">
+          <li ng-repeat="item in hangoutCommentList">
+            <a class="pull-left" href="#">
+              <img class="avatar" alt="{{item.authorDisplayName}}" title="{{item.authorDisplayName}}" ng-src="{{avatarUrl(item.authorId)}}">
+            </a>
+            <div class="content">
+             {{item.title}}
+            </div>
+            <div class="clearfix"></div>
+          </li>
+        </ul>
+
+      </div>
+      <div ng-show="step == 5">
+        <h3>{{'Rate the people you just meet'|i18n}}</h3>
+        <ul class="list rate-people-list">
+          <li ng-repeat="item in data.alreadyJoin" ng-hide="item.id == me.id" ng-init="rate[item.id] = 5">           
+            <span class="pull-left">              
+              <img class="avatar" alt="{{item.displayName}}" title="{{item.displayName}}" ng-src="{{avatarUrl(item.id)}}" />
+            </span>
+            
+            <div class="content">
+              <rating value="rate[item.id]" max="10"></rating> 
+            </div>
+
+            <div class="clearfix"></div>
+          </li>
+        </ul>
+        <button ng-click="submitRating()" class="btn btn-primary" ng-disable="alreadyRating"> {{'Submit Rating'|i18n}}</button>
+      </div>
+    </div>
+    <div class="text-center" ng-show="step == 6">
+      <h3>{{'The hangout already finished'|i18n}}</h3>
+    </div>
+</div>

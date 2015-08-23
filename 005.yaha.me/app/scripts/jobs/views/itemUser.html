@@ -1,0 +1,42 @@
+<yh-uploader class="btn btn-primary ladda-button pull-right " 
+  field-name="file"
+  set-height="{{height}}"
+  action="{{uploadActionUrl}}" 
+  security-header-name="sid" 
+  security-header-value="{{sid}}" 
+  on-complete="updatePhoto" 
+  ng-if="isEditAbled"
+  style="margin-bottom:-64px;"
+> 
+  <i class="fa fa-picture-o"></i>     
+</yh-uploader>
+<div class="jumbotron imgLiquid img-rounded">
+  <img ng-src="{{photoUrl}}"/>
+  <h1 editable-text="item.title" style="color:{{item.color || '#2c3e50'}}">{{item.title}}</h1>
+  <h5 editable-textarea="item.subTitle" style="color:{{item.color || '#2c3e50'}}" ng-bind-html="item.subTitle | nl2br" e-cols="55"></h5>
+</div>
+<a href="" ng-if="isEditAbled" class="btn btn-inverse fa fa-magic pull-right" style="margin-top:-65px;" colorpicker colorpicker-position="left" ng-model="item.color"></a>
+
+<ng-include ng-if="isEditAbled || recruitmentList.length > 0" src="yh.path('jobs/views/itemUser-recruitment.html')"></ng-include>
+<ng-include ng-if="isEditAbled || item.skillList.length > 0" src="yh.path('jobs/views/itemUser-skills.html')"></ng-include>
+<ng-include ng-if="isEditAbled || item.educationAndWorkExperienceList.length > 0" src="yh.path('jobs/views/itemUser-educationAndWorkExperience.html')"></ng-include>
+<ng-include ng-if="isEditAbled || item.projectExperienceList.length > 0" src="yh.path('jobs/views/itemUser-projectExperience.html')"></ng-include>
+<br />
+  
+<tabset ng-hide="true">
+  <tab>
+    <tab-heading> <i class="fa fa-question"> ({{questionList.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="questionList" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameQuestion"/>
+  </tab>
+  <tab>
+    <tab-heading> <i class="fa fa-thumbs-up"> ({{thumbsUpList.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="thumbsUpList" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameThumbsUp"/>
+  </tab>
+  <tab>
+    <tab-heading> <i class="fa fa-thumbs-down"> ({{thumbsDownList.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="thumbsDownList" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameThumbsDown"/>
+  </tab>
+</tabset>

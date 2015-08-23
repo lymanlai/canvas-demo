@@ -1,0 +1,43 @@
+<div class="panel panel-success text-center">
+  <div class="panel-body" ng-hide="loaded">
+    <h6><i class="fa fa-spinner fa-spin"></i> {{'Loading, wait for one moment'|i18n}}</h6>
+  </div>
+  <ul class="list-group" ng-show="items">
+    <li class="list-group-item" ng-repeat="item in items track by $index" id="item-{{item.id}}">
+      <a class="pull-left" ui-sref="yaha.itemUser({id:item.createrId})">
+        <img ng-src="{{yh.avatarUrl(item.createrId)}}" class="avatar-30 img-circle" />
+        &nbsp;
+      </a>
+      <span class="pull-right" am-time-ago="item.createDate">
+      </span>
+      <a href="" ng-click="toggleShow(item.id)">{{item.title}}</a>
+
+      <div ng-show="currentShowId == item.id" class="clearfix">
+        <br class="hidden-xs" />
+        <span ng-repeat="tag in item.tags"> <a href="" ng-click="addKeywordsAndTags(tag)" class="label label-primary">{{tag}}</a> </span>
+        <br class="hidden-xs"/>
+        <br class="hidden-xs"/>
+        <div class="text-left" ng-bind-html="item.content | nl2br | yhContentLink"></div>
+        <br />
+        <div class="btn-group">
+          <button type="button" tooltip="{{'Add a Comment'|i18n}}" class="btn btn-info fa fa-comment" ng-click="showModalForm('comment', item)">
+            {{item.commentCount || 0}}
+          </button>
+          <button type="button" tooltip="{{'Thumbs Up'|i18n}}" class="btn btn-success fa fa-thumbs-up" ng-click="showModalForm('thumbsUp', item)">
+            {{item.thumbsUpCount || 0}}
+          </button>
+          <button type="button" tooltip="{{'Thumbs Down'|i18n}}" class="btn btn-danger fa fa-thumbs-down" ng-click="showModalForm('thumbsDown', item)">
+            {{item.thumbsDownCount || 0}}
+          </button>
+          <a ui-sref="yaha.item({id:item.id})" tooltip="{{'Go to detail page'|i18n}}" class="btn btn-primary fa fa-sign-in"></a>
+        </div>
+        <br />
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="text-center">
+  <a ui-sref="yaha.add" class="btn btn-primary btn-lg">{{'YaHa Now!'|i18n}}</a>
+</div>
+
+

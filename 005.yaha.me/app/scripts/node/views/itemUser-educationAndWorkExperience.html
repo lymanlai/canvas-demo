@@ -1,0 +1,27 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{'Education & Work Experience'|i18n}}</h3>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item clearfix" ng-repeat="educationAndWorkExperience in item.educationAndWorkExperienceList track by $index">
+      <div class="clickable" ng-hide="currentShowEducationAndWorkExperienceId == $index" ng-click="toggleShowEducationAndWorkExperience($index)">
+        <a href="">{{educationAndWorkExperience.title || notSetupYet}}</a>
+        <span class="pull-right">{{educationAndWorkExperience.timeSpan}}</span>
+      </div>
+      <div class="detail" ng-show="currentShowEducationAndWorkExperienceId == $index">
+        <div class="clearfix">
+          <span editable-text="educationAndWorkExperience.title">{{educationAndWorkExperience.title || notSetupYet}}</span>
+          <span class="pull-right" editable-text="educationAndWorkExperience.timeSpan">{{educationAndWorkExperience.timeSpan || notSetupYet}}</span>
+        </div>
+        <br />
+        <div editable-textarea="educationAndWorkExperience.detail" e-cols="55" ng-bind-html="educationAndWorkExperience.detail | nl2br">
+        </div>
+        <br />
+        <a ng-click="deleteFromArray(item.educationAndWorkExperienceList, $index)" href="" class="btn btn-danger pull-right" ng-if="isEditAbled">{{'Delete'|i18n}}</a>
+      </div>
+    </li>
+  </ul>
+  <div class="panel-footer" ng-if="isEditAbled">
+    <button ng-click="listAdd('educationAndWorkExperienceList', tpl.educationAndWorkExperience)" class="btn btn-primary">{{'Add'|i18n}}</button>
+  </div>
+</div>

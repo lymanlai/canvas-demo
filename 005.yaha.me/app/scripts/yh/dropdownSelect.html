@@ -1,0 +1,12 @@
+<div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle">
+    <span ng-bind="ngModel || placeholder"></span>
+    <span class="caret"></span>
+  </button>
+  <span class="dropdown-arrow dropdown-arrow-inverse"></span>
+  <ul class="dropdown-menu dropdown-inverse">
+    <li ng-repeat="item in selectList" ng-class="{active: item == ngModel}">
+      <a href="" ng-click="updateSelect(item)">{{item}}</a>
+    </li>
+  </ul>
+</div>

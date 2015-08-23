@@ -1,0 +1,61 @@
+<div class="panel panel-info">
+  <div class="panel-heading clearfix">
+    {{'Public List'|i18n}}
+    &nbsp;
+    <button ng-if="isEditAbled" ng-click="showAddModalForm()" class="btn btn-xs btn-primary">{{'Add'|i18n}}</button>
+    <div class=" pull-right">
+    <div class="btn-group">
+      <button type="button" class="btn btn-xs" ng-class="{'btn-info':publicListTypeFilter == '','btn-default': publicListTypeFilter != ''}" ng-model="publicListTypeFilter" btn-radio="''">
+        {{'All'|i18n}}
+      </button>
+      <button type="button" class="btn btn-xs" ng-class="{'btn-primary':publicListTypeFilter == 'ToDo','btn-default': publicListTypeFilter != 'ToDo'}" ng-model="publicListTypeFilter" btn-radio="'ToDo'">
+        {{'ToDo'|i18n}}
+      </button>
+      <button type="button" class="btn btn-xs" ng-class="{'btn-success':publicListTypeFilter == 'Done','btn-default': publicListTypeFilter != 'Done'}" ng-model="publicListTypeFilter" btn-radio="'Done'">
+        {{'Done'|i18n}}
+      </button>
+      <button type="button" class="btn btn-xs" ng-class="{'btn-default':publicListTypeFilter == 'Later','btn-default': publicListTypeFilter != 'Later'}" ng-model="publicListTypeFilter" btn-radio="'Later'">
+        {{'Later'|i18n}}
+      </button>
+    </div>
+    </div>
+  </div>
+  <table class="table" ng-if="(publicList | theToDoTypeFilter: publicListTypeFilter).length != 0">
+    <tbody>
+      <tr>
+        <th>{{'Title'|i18n}}</th>
+        <th>{{'Time'|i18n}}</th>
+        <th>{{'Comments'|i18n}}</th>
+        <th>{{'ThumbsUp'|i18n}}</th>
+        <th>{{'ThumbsDown'|i18n}}</th>
+        <th>{{'Status'|i18n}}</th>
+      </tr>
+      <tr ng-repeat="post in publicList | theToDoTypeFilter: publicListTypeFilter track by $index ">        
+        <td><a ui-sref="todo.item({id:post.id})">{{post.title || 'null'}}</a></td>
+        <td><span am-time-ago="post.createDate"></span></td>
+        <td>{{post.commentCount}}</td>
+        <td>{{post.thumbsUpCount}}</td>
+        <td>{{post.thumbsDownCount}}</td>
+        <td>
+          <div class="pull-right btn-group" ng-if="isEditAbled">
+            <button type="button" class="btn btn-xs dropdown-toggle" ng-class="{'btn-primary': post.status == 'ToDo','btn-success': post.status == 'Done','btn-default': post.status == 'Later'}" >
+              {{post.status || 'ToDo' |i18n}} <span class="caret"></span>
+            </button>
+            <span class="dropdown-arrow dropdown-arrow-inverse"></span>
+            <ul class="dropdown-menu dropdown-inverse">
+              <li><a href="" ng-click="updateStatus(post, 'ToDo')" ng-if="post.status != 'ToDo'">{{'ToDo'|i18n}}</a></li>
+              <li><a href="" ng-click="updateStatus(post, 'Done')" ng-if="post.status != 'Done'">{{'Done'|i18n}}</a></li>
+              <li><a href="" ng-click="updateStatus(post, 'Later')" ng-if="post.status != 'Later'">{{'Later'|i18n}}</a></li>
+            </ul>
+          </div>
+          <button ng-if="!isEditAbled" type="button" class="btn btn-xs" ng-class="{'btn-primary': post.status == 'ToDo','btn-success': post.status == 'Done','btn-default': post.status == 'Later'}" >
+            {{post.status || 'ToDo' |i18n}}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 ng-if="(publicList | theToDoTypeFilter: publicListTypeFilter).length == 0" class="text-center">
+    {{'No Item Here'|i18n}}
+  </h3>
+</div>

@@ -1,0 +1,54 @@
+<form class="form-horizontal" name="form" novalidate ng-submit="submit()">
+  <div class="form-group ng-class:{'has-error':isDirty(form.email)}">
+    <label class="col-sm-2 control-label" for="email">{{'Email'|i18n}}</label>
+    <div class="col-sm-10">
+       <p class="form-control-static" ng-bind="formData.email"></p>
+    </div>
+  </div>    
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="displayName">{{'Display Name'|i18n}}</label>
+    <div class="col-sm-10">
+      <p class="form-control-static" ng-bind="formData.displayName"></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <label class="checkbox ng-class:{checked:formData.changePassword}" for="changePassword">
+        <span class="icons">
+          <span class="first-icon fui-checkbox-unchecked"></span>
+          <span class="second-icon fui-checkbox-checked"></span>
+        </span>
+        <input type="checkbox" id="changePassword" name="changePassword" ng-model="formData.changePassword" required />
+        &nbsp;{{'Change Password'|i18n}}
+      </label>
+    </div>
+  </div>  
+<div ng-show="formData.changePassword">
+  <div class="form-group ng-class:{'has-error':isDirty(form.oldPassword)}">
+    <label class="col-sm-2 control-label" for="oldPassword">{{'Old Password'|i18n}}</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" id="oldPassword" name="oldPassword" ng-model="oldPassword" placeholder="{{'Old Password'|i18n}}" required autofocus />
+      <span class="help-block" ng-show="isError(form.oldPassword, 'required')">{{'Please input your old password'|i18n}}</span>
+    </div>
+  </div>
+  <div class="form-group ng-class:{'has-error':isDirty(form.newPassword)}">
+    <label class="col-sm-2 control-label" for="newPassword">{{'New Password'|i18n}}</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" id="newPassword" name="newPassword" ng-model="newPassword" placeholder="{{'New Password'|i18n}}" required />
+      <span class="help-block" ng-show="isError(form.newPassword, 'required')">{{'Please input your new password'|i18n}}</span>
+    </div>
+  </div>
+  <div class="form-group ng-class:{'has-error':isDirty(form.verifyPassword)}">
+    <label class="col-sm-2 control-label" for="verifyPassword">{{'Verify Password'|i18n}}</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" id="verifyPassword" name="verifyPassword" ng-model="verifyPassword" placeholder="{{'Verify Password'|i18n}}" required yh-match="newPassword" />
+      <span class="help-block" ng-show="isError(form.verifyPassword, 'match')">{{"Passwords don't match."|i18n}}</span>
+    </div>
+  </div>
+</div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">{{'Save'|i18n}}</button>
+    </div>
+  </div>
+</form>

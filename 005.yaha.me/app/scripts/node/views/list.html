@@ -1,0 +1,52 @@
+<div class="panel panel-success text-center">
+  <div class="panel-heading">
+    <div class="form-inline clearfix">      
+      <div class="form-group col-xs-12 col-sm-2">
+        <dropdown-select ng-model="search.city" placeholder="{{'City'|i18n}}" select-list="cityList" />
+      </div>
+      <div class="form-group col-xs-12 col-sm-10">
+        <input class="form-control" type="text" id="keywordsAndTags" name="keywordsAndTags" 
+          placeholder="{{'keywords'|i18n}}"
+          ng-model="keywordsAndTags" tags-list="tagsList" />
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-body" ng-show="!items">
+    <h6>{{'Got Nothing, change your keywords maybe'|i18n}}</h6>
+  </div>
+  <ul class="list-group" ng-show="items">
+    <li class="list-group-item" ng-repeat="item in items track by $index" id="item-{{item.id}}">
+      <a class="pull-left" ui-sref="node.itemUser({id:item.createrId})">
+        <img ng-src="{{yh.avatarUrl(item.createrId)}}" class="avatar-30 img-circle" />
+        &nbsp;
+      </a>
+      <span class="pull-right" am-time-ago="item.createDate">
+      </span>
+      <a href="" ng-click="toggleShow(item.id)">{{item.title}}</a>
+
+      <div ng-show="currentShowId == item.id" class="clearfix">
+        <br class="hidden-xs" />
+        <span ng-repeat="tag in item.tags"> <a href="" ng-click="addKeywordsAndTags(tag)" class="label label-primary">{{tag}}</a> </span>
+        <br class="hidden-xs"/>
+        <br class="hidden-xs"/>
+        <div class="text-left" ng-bind-html="item.content | nl2br"></div>
+        <br />
+        <div class="btn-group">
+          <button type="button" class="btn btn-info fa fa-question" ng-click="showModalForm('question', item)">
+            {{item.questionCount || 0}}
+          </button>
+          <button type="button" class="btn btn-success fa fa-thumbs-up" ng-click="showModalForm('thumbsUp', item)">
+            {{item.thumbsUpCount || 0}}
+          </button>
+          <button type="button" class="btn btn-danger fa fa-thumbs-down" ng-click="showModalForm('thumbsDown', item)">
+            {{item.thumbsDownCount || 0}}
+          </button>
+          <a ui-sref="node.item({id:item.id})" class="btn btn-primary fa fa-sign-in"></a>
+        </div>
+        <br />
+      </div>
+    </li>
+  </ul>
+</div>
+

@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs">
+  <li ng-class="{ active: $state.is('setting.account') }" ng-show="hasPermission('user')"><a ui-sref="setting.account"><i class="fui-lock"></i>&nbsp;<span>{{'Account'|i18n}}</span></a></li>
+  <li ng-class="{ active: $state.is('setting.profile') }" ng-show="hasPermission('user')"><a ui-sref="setting.profile"><i class="fui-user"></i>&nbsp;<span>{{'Profile'|i18n}}</span></a></li>
+</ul>
+<div ui-view ng-animate="{enter:'fade-enter'}"></div>

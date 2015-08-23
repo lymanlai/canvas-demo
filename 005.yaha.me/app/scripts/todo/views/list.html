@@ -1,0 +1,25 @@
+<div class="panel panel-success text-center">
+  <div class="panel-body" ng-hide="loaded">
+    <h6><i class="fa fa-spinner fa-spin"></i> {{'Loading, wait for one moment'|i18n}}</h6>
+  </div>
+  <ul class="list-group" ng-show="items">
+    <li class="list-group-item text-left fadeInOut" ng-repeat="item in items track by $index" id="item-{{item.id}}">
+      <a class="pull-left" ui-sref="todo.itemUser({id:item.createrId})">
+        <img ng-src="{{yh.avatarUrl(item.createrId)}}" class="avatar-30 img-circle" />
+        &nbsp;
+      </a>
+      <div class="pull-right">
+        <span am-time-ago="item.createDate"></span>
+        <span class="fa fa-signal"> {{item.thumbsUpCount + item.commentCount + item.thumbsDownCount}}</span>
+      </div>
+      <a ui-sref="todo.item({id:item.id})">{{item.title || 'null'}}</a>
+
+    </li>
+  </ul>
+</div>
+<div class="text-center">
+  <a ui-sref="todo.my" class="btn btn-info">{{'My'|i18n}}</a>
+  <button ng-click="showAddModalForm()" ng-show="hasPermission('user')" class="btn btn-primary">{{'Add'|i18n}}</button>
+</div>
+
+

@@ -1,0 +1,11 @@
+<div class="form-wrap">
+<h3>{{'Please select your language'|i18n}}</h3>
+<ul class="list location-list">
+  <li>
+    <button class="pull-left btn btn-primary" ng-click="updateLanguage(item)" ng-repeat="item in items ">
+        {{item.label}}
+    </button>
+    <div class="clearfix"></div>
+  </li>
+</ul>
+</div>

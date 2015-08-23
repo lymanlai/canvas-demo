@@ -1,0 +1,24 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      {{'Recruitment List'|i18n}}
+    </h3>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>{{'Title'|i18n}}</th>
+        <th>{{'Date'|i18n}}</th>
+        <th ng-if="isEditAbled"></th>
+      </tr>
+      <tr ng-repeat="recruitment in recruitmentList track by $index ">
+        <td><a ui-sref="jobs.item({id:recruitment.id})">{{recruitment.title}}</a></td>
+        <td><span am-time-ago="recruitment.createDate"></span></td>
+        <td ng-if="isEditAbled"><a href="" ng-click="trashRecruitment(recruitment, $index)" class="label label-danger">{{'Delete'|i18n}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="panel-footer" ng-if="isEditAbled">
+    <a ui-sref="jobs.add" class="btn btn-primary">{{'Add'|i18n}}</a>
+  </div>
+</div>

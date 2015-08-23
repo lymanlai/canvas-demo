@@ -1,0 +1,33 @@
+<table class="table table-hover">
+  <thead>
+    <tr ng-mouseover="titleFocus = true" ng-mouseout="titleFocus = false; setFocus(0, 'end')">
+      <th>        
+        <div>{{todoData.title}}</div>
+      </th>
+      <!-- <th width="50px"></th> -->
+      <th width="1px">
+        <a ng-if="todoData.parentId" ui-sref="todo.item({id:todoData.parentId})" class="fa fa-chevron-left"></a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in items track by $index" 
+    >
+      <td>
+        <div 
+          ng-style="{'padding-left':item.indent * 20 + 'px', 'min-height': '20px'}"     
+          >{{item.title}}</div>
+      </td>
+      <!-- <td class="text-right">
+        <div ng-show="isFocus($index) && (item.title !== '' || item.childListId)">
+          <a href="" ng-click="goToChildList($index)" class="fa fa-clock-o"> 11</a>
+        </div>
+      </td> -->
+      <td class="text-right">
+        <span ng-show="item.childListId">
+          <a href="" ng-click="goToChildList($index)" class="fa fa-chevron-right"></a>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

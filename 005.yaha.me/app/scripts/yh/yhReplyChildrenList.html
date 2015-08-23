@@ -1,0 +1,16 @@
+<div class="reply-list" ng-show="item.childrenShow">
+  <div class="media" ng-repeat="subItem in item.children">
+    <a class="pull-left" ng-href="{{replyUserLink(subItem.createrId)}}">
+      <img ng-src="{{yh.avatarUrl(subItem.createrId)}}" class="avatar-30 img-circle" />
+    </a>
+    <div class="media-body">
+      <div class="media-meta">
+        <a ng-href="{{replyUserLink(subItem.createrId)}}" class="media-heading">{{subItem.createrDisplayName}}</a> 
+        <span am-time-ago="subItem.createDate"></span>
+        <yh-reply-thumbs-up-down item="item" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown"></yh-reply-thumbs-up-down>
+      </div>
+      {{subItem.content}}
+      <yh-reply-meta item="subItem" reply-user-link="replyUserLink" on-get-children="onGetChildren" on-add-child="onAddChild" type="type" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown"></yh-reply-meta>
+    </div>
+  </div>
+</div>

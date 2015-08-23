@@ -1,0 +1,19 @@
+<form name="form" class="" novalidate ng-submit="submit()" ui-keydown="{'ctrl-enter':'submit()'}">
+  <div class="modal-header">
+    <h4>{{ title }}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="ng-class:{'has-error':form.content.$dirty && form.content.$invalid}" ng-hide="submitResult">
+      <textarea msd-elastic name="content" id="content" class="form-control" rows="3" cols="50" placeholder="{{'Content'|i18n}}" required ng-model="formData.content" yh-focus="true"></textarea>
+      <span class="help-block" ng-show="form.content.$dirty && form.content.$error.required">{{'Please input the content'|i18n}}</span>
+    </div>
+    <alert type="'success'" ng-show="submitResult == 'success'" >{{'Submit Success'|i18n}}</alert>
+  </div>
+  <div class="modal-footer">
+    <span class="pull-left">
+      <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">{{'Submit'|i18n}}</button> (Ctrl+Enter)
+    </span>
+    <a href="" ng-click="$close()" class="btn btn-default">{{'Cancel'|i18n}}</a>
+    (Esc)
+  </div>
+</form>

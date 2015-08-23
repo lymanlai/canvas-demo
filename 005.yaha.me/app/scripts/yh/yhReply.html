@@ -1,0 +1,33 @@
+<ul class="media-list">
+  <li class="media">
+    <a class="pull-left" ng-href="{{replyUserLink(userId)}}">
+      <img ng-src="{{yh.avatarUrl(userId)}}" class="avatar-30 img-circle" />
+    </a>
+    <div class="media-body">
+      <form name="form" class="row" novalidate ng-submit="add()" ui-keydown="{'ctrl-enter':'add()'}">
+        <div class="col-sm-10 form-group ng-class:{'has-error':form.content.$dirty && form.content.$invalid}">
+          <textarea msd-elastic name="content" id="content" class="form-control" rows="3" placeholder="{{'Content'|i18n}}" required ng-model="formData.content"></textarea>
+          <span class="help-block" ng-show="form.content.$dirty && form.content.$error.required">{{'Please input the content'|i18n}}</span>
+        </div>
+        <div class="col-sm-2">
+          <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">{{'Add'|i18n}} </button> (Ctrl+Enter)
+        </div>
+      </form>
+    </div>
+  </li>
+  <li class="media" ng-repeat="item in itemList">
+    <a class="pull-left" ng-href="{{replyUserLink(item.createrId)}}">
+      <img ng-src="{{yh.avatarUrl(item.createrId)}}" class="avatar-30 img-circle" />
+    </a>
+    <div class="media-body">
+      <div class="media-meta">
+        <a ng-href="{{replyUserLink(item.createrId)}}" class="media-heading">{{item.createrDisplayName}}</a> 
+        <span am-time-ago="item.createDate"></span>
+        <yh-reply-thumbs-up-down item="item" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown"></yh-reply-thumbs-up-down>
+      </div>
+      {{item.content}}
+      
+      <yh-reply-meta item="item" reply-user-link="replyUserLink" on-get-children="onGetChildren" on-add-child="onAddChild" type="type" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown"></yh-reply-meta>    
+    </div>
+  </li>
+</ul>

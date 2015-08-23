@@ -1,0 +1,40 @@
+<div class="panel panel-success text-">
+  <div class="panel-heading clearfix text-center">
+    <h3 class="panel-title">{{item.title}}</h3>
+    <div>
+      <span ng-repeat="tag in item.tags"> <a href="" ng-click="addKeywordsAndTags(tag)" class="label label-primary">{{tag}}</a> </span>
+    </div>
+  </div>
+
+  <div class="panel-body" ng-bind-html="item.content | nl2br | yhContentLink">
+  </div>
+  <div class="panel-footer clearfix">
+    <div class="pull-right">
+      <a href="" ui-sref="yaha.itemUser({id:item.createrId})">
+        <img ng-src="{{yh.avatarUrl(item.createrId)}}" class="avatar-30 img-circle" />
+        &nbsp;
+        {{item.createrDisplayName}}
+      </a>
+      <span am-time-ago="item.createDate"></span>
+    </div>
+  </div>
+</div>
+<br />
+  
+<tabset>
+  <tab>
+    <tab-heading> <i class="fa fa-comment"> ({{listA.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="listA" reply-user-link="replyUserLink" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameA"/>
+  </tab>
+  <tab>
+    <tab-heading> <i class="fa fa-thumbs-up"> ({{thumbsUpList.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="thumbsUpList" reply-user-link="replyUserLink" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameThumbsUp"/>
+  </tab>
+  <tab>
+    <tab-heading> <i class="fa fa-thumbs-down"> ({{thumbsDownList.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="thumbsDownList" reply-user-link="replyUserLink" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameThumbsDown"/>
+  </tab>
+</tabset>

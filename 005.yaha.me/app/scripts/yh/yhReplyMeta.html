@@ -1,0 +1,8 @@
+<div class="reply-meta">
+  <a href="" ng-click="showReplyForm(item)"> <i class="fa fa-reply"></i> </a>
+  &nbsp;
+  <span ng-show="item.childCount > 0">
+    <a href="" ng-click="showChildren(item)" ng-show="!item.childrenShow"> <i class="fa fa-plus" ></i> </a>
+    <a href="" ng-click="item.childrenShow = false" ng-show="item.childrenShow"> <i class="fa fa-minus" ></i> </a>
+  </span>
+</div>

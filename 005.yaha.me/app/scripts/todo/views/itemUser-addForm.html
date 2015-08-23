@@ -1,0 +1,36 @@
+<form name="form" class="" novalidate ng-submit="submit()" ui-keydown="{'ctrl-enter':'!form.$invalid && submit()'}">
+  <div class="modal-header">
+    <h4>{{'Add New One'|i18n}}</h4>
+  </div>
+  <div class="modal-body">
+    <div ng-hide="isPosting || submitResult == 'success'">
+      <div class="ng-class:{'has-error':form.title.$dirty && form.title.$invalid}" >
+        <textarea msd-elastic name="title" id="title" class="form-control" rows="3" cols="50" placeholder="{{'Title'|i18n}}" required ng-model="formData.title" yh-focus="true"></textarea>
+        <span class="help-block" ng-show="form.title.$dirty && form.title.$error.required">{{'Please input the title'|i18n}}</span>
+      </div>
+      <div class="form-group">
+        <label class="checkbox ng-class:{checked:formData.isPrivate}" for="isPrivate">
+          <span class="icons">
+            <span class="first-icon fui-checkbox-unchecked"></span>
+            <span class="second-icon fui-checkbox-checked"></span>
+          </span>
+          <input type="checkbox" id="isPrivate" name="isPrivate" ng-model="formData.isPrivate" />
+          &nbsp;{{'Make it Private (Only you can see it)'|i18n}}
+        </label>
+      </div>
+    </div>
+    <div ng-show="isPosting" >
+      <i class="fa fa-spinner fa-spin"></i> {{'Posting...'|i18n}}
+    </div>
+    <alert type="'success'" ng-show="submitResult == 'success'" >{{'Submit Success'|i18n}}</alert>
+    <alert type="'danger'" ng-show="submitResult == 'error'" >
+      {{errorMsg}}
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <span class="pull-left">
+      <button ng-click="$close()" ng-disabled="isPosting" class="btn btn-default">{{'Cancel'|i18n}}</button>
+    </span>
+    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">{{'Submit'|i18n}}</button> (Ctrl+Enter)
+  </div>
+</form>

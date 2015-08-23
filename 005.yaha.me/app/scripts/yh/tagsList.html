@@ -1,0 +1,16 @@
+<div class="tagsinput" ng-click="focus()"> 
+  <span class="tag" ng-repeat="tag in ngModel track by $index" ng-click="deleteTag($index)">
+    <span>{{tag}}&nbsp;&nbsp;</span>
+    <a class="tagsinput-remove-link"></a>
+  </span>
+  <div class="tagsinput-add-container">
+    <div class="tagsinput-add"></div>
+    <input placeholder="{{placeholder}}" ng-model="newTag" style="color: rgb(102, 102, 102); width: {{width}}px;"  class="dropdown-toggle"/>
+      <span class="dropdown-arrow dropdown-arrow-inverse"  ng-show="((filteredTagsList | filter: newTag).length > 0)"></span>
+      <ul class="dropdown-menu dropdown-inverse" ng-show="((filteredTagsList | filter: newTag).length > 0)">
+        <li ng-repeat="tag in filteredTagsList | filter: newTag track by $index">
+          <a href="" ng-click="selectTag(tag)">{{tag}}</a>
+        </li>
+      </ul>
+  </div>
+</div>

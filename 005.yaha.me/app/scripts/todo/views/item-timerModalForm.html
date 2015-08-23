@@ -1,0 +1,85 @@
+<div class="modal-header text-center">
+  <button type="button" class="close" ng-hide="isTicking || isWaitForInput" ng-click="$close()" aria-hidden="true">&times;</button>
+  <h4>
+    <timer interval="1000" countdown="totalCountDownSecond" autostart="false">
+      {{hours < 10 ? '0' + hours : hours}}
+      <ng-if="hours">:</ng-if>
+      {{minutes < 10 ? '0' + minutes : minutes }}
+      <ng-if="minutes">:</ng-if>
+      {{seconds < 10 ? '0' + seconds : seconds }}
+    </timer>
+  </h4>
+  <div class="progress progress-striped ng-class:{active: isTicking}">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">
+    </div>
+  </div>
+</div>
+<div class="modal-body">
+  <h4 class="text-center">
+    {{item.title}}
+  </h4>    
+</div>
+<div class="modal-footer">
+  <div class="text-center">
+    <form ng-show="isWaitForInput" name="theForm" class="clearfix" novalidate ng-submit="submit()" ui-keydown="{'ctrl-enter':'submit()'}">       
+      <div class="alert alert-success" ng-show="finalTickingType == 'success'">{{"^^v Good Job! Write Done your current mood."|i18n}}</div>
+      <div class="alert alert-warning" ng-show="finalTickingType == 'rest'">{{"└(^o^)┘ You should powerfull now! Write down some feeling then go back to work!"|i18n}}</div>
+      <div class="alert alert-danger" ng-show="finalTickingType == 'broken'">{{"'Martians are Attacking the Earth' or some other reasone make you broken?"|i18n}}</div> 
+      
+      <div class="form-group col-sm-10 col-xs-12">
+          <textarea msd-elastic class="form-control" type="text" id="content" name="content" ng-model="formData.content" placeholder="{{'Content'|i18n}}"  required yh-focus="isWaitForInput" />
+      </div>
+      <div class="form-group col-sm-2 col-xs-12">
+        <button class="btn btn-primary" type="submit" ng-disabled="theForm.$invalid">{{'Save'|i18n}}</button> (Ctrl+Enter)
+      </div>      
+    </form>
+    <p ng-hide="isTicking || isWaitForInput">
+      <button class="btn btn-primary btn-lg" ng-click="fighting()"><i class="fa fa-wrench"></i> {{'Fighting!'|i18n}}</button>
+    </p>
+    <p ng-hide="isTicking || isWaitForInput">
+      <button class="btn btn-warning btn-lg" ng-click="takeARest()"><i class="fa fa-coffee"></i> {{'Take a rest'|i18n}}</button>
+    </p>
+    <p ng-show="isTicking">
+      <button class="btn btn-danger btn-lg" ng-click="broken()">
+        !! ::>_<:: !!
+        <br />
+        <i class="fa fa-warning"></i>  
+        <br />
+        {{'Being Broken'|i18n}}
+      </button>
+    </p>
+  </div>
+  <a class="fa fa-clock-o" href="" ng-click="item.showHistory = !item.showHistory"></a>
+  <a class="fa fa-question" href="" ng-click="helperShow = !helperShow"></a>
+  <ol ng-show="helperShow" class="text-left">
+    <li>{{"'Fighting' Button is for starting a 25 minutes working section"|i18n}}</li>
+    <li>{{"'Take a rest' Button is for starting a 5 minutes relaxing section"|i18n}}</li>
+    <li>{{"While you fighting or relaxing, the 'Being Broken' button show up for you in case 'Martians are Attacking the Earth' event happen ;)"|i18n}}</li>
+  </ol>
+  <table class="table text-left table-striped" ng-show="item.showHistory">
+      <thead>
+        <tr>
+          <th width="150px"></th>
+          <th width="350px"></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="(date, oneHistory) in item.history track by $index">
+          <tr class="success">
+            <td class="text-right" colspan="3">
+              <span class="pull-left">
+                <i class="fa fa-wrench color-turquoise"></i>  {{oneHistory.summary.success}} 
+                <i class="fa fa-coffee color-sun-flower"></i> {{oneHistory.summary.rest}}  
+                <i class="fa fa-warning color-alizarin"></i> {{oneHistory.summary.broken}}  
+              </span>
+              {{date}}
+            </td>
+          </tr>
+          <tr ng-repeat="log in oneHistory.logs" ng-class="{danger: log.type == 'broken'}">
+            <td>{{log.timeStartEnd}}</td>
+            <td>{{log.title}}</td>
+            <td><i class="fa ng-class:{'fa-wrench color-turquoise': log.type == 'success', 'fa-coffee color-sun-flower': log.type == 'rest', 'fa-warning color-alizarin': log.type == 'broken'}"></i></td>
+          </tr>
+      </tbody>
+    </table>
+</div>

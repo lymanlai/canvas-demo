@@ -1,0 +1,14 @@
+<div class="form-wrap">
+  <div class="login-form text-center">
+  <form name="form" novalidate ng-submit="submit()">
+    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+    <div class="form-group">
+       <p class="form-control-static" ng-bind="email"></p>
+    </div>
+    <div class="form-group">
+      <p class="form-control-static" ng-bind="activeKey"></p>
+    </div>
+    <button class="btn btn-primary btn-large btn-block" type="submit" ng-disabled="form.$invalid">{{'Active your account now!'|i18n}}</button>
+  </form>
+  </div>
+</div>

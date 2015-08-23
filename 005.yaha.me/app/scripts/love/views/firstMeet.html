@@ -1,0 +1,250 @@
+<div class="form-inline text-center clearfix">
+  <div class="form-group">
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle">
+        <span ng-bind="firstMeet.city || 'City'|i18n"></span>
+        <span class="caret"></span>
+      </button>
+      <span class="dropdown-arrow dropdown-arrow-inverse"></span>
+      <ul class="dropdown-menu dropdown-inverse">
+        <li ng-repeat="item in cityList" ng-class="{active: item == firstMeet.city}">
+          <a href="" ng-click="updateCity(item)">{{item}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle">
+        <span ng-bind="firstMeet.day.label || 'Day'|i18n"></span>
+        <span class="caret"></span>
+      </button>
+      <span class="dropdown-arrow dropdown-arrow-inverse"></span>
+      <ul class="dropdown-menu dropdown-inverse">
+        <li ng-repeat="item in dayList" ng-class="{active: item.key == firstMeet.day.key}">
+          <a href="" ng-click="update('day', item)">{{item.label}}</a>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="form-group">
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle">
+        <span ng-bind="firstMeet.time || 'Time'|i18n"></span>
+        <span class="caret"></span>
+      </button>
+      <span class="dropdown-arrow dropdown-arrow-inverse"></span>
+      <ul class="dropdown-menu dropdown-inverse">
+        <li ng-repeat="item in timeList" ng-class="{active: item == firstMeet.time}">
+          <a href="" ng-click="update('time', item)">{{item}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle ng-class:{disabled: !firstMeet.city}">
+        <span ng-bind="firstMeet.station || 'Station'|i18n"></span>
+        <span class="caret"></span>
+      </button>
+      <span class="dropdown-arrow dropdown-arrow-inverse"></span>
+      <ul class="dropdown-menu dropdown-inverse">
+        <li ng-repeat="item in stationList" ng-class="{active: item.stationName == firstMeet.station}">
+          <a href="" ng-click="update('station', item.stationName)">{{item.stationName}}</a>
+        </li>
+        <!-- <li>
+          <a href="" ng-click="showAddStationForm()">{{'Add Station'|i18n}}</a>
+        </li> -->
+
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<br class="hidden-xs" />
+
+<div ng-show="firstMeetItem">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <span class="pull-right">
+        <i class="fa fa-male"> {{firstMeetItem.memberCount.male || 0}} </i>
+        &nbsp;
+        <i class="fa fa-female"> {{firstMeetItem.memberCount.feMale || 0}} </i>
+      </span>
+      #{{firstMeetItemIndex}} [ {{firstMeetItem.time}} ] {{firstMeetItem.station}}
+    </div>
+    <div class="panel-body text-center">
+      <!-- members list -->
+      <div class="clearfix">
+        <a href="#" ng-repeat="member in firstMeetItem.members" class="col-sm-4 col-xs-4">
+          <img ng-src="{{yh.avatarUrl(member.id)}}" class="avatar-60 img-circle" /> 
+          <br />
+          {{member.displayName}}
+        </a>
+      </div>
+
+      <!-- ticket empty alert message -->
+      <div ng-show="ticketEmpty">
+        <h5>{{'You do not have any ticket to join First Meet'|i18n}}</h5>
+        <p>
+        {{'Buy one ticket'|i18n}} &nbsp;<a href="https://me.alipay.com/lymanlai" target="_blank" class="btn btn-primary fa fa-rmb"> 1</a>
+        </p>
+        <p>
+        {{'Buy 999 tickets'|i18n}} &nbsp;<a href="https://me.alipay.com/lymanlai" target="_blank" class="btn btn-primary fa fa-rmb"> 99</a>
+        </p>
+
+        <div class="alert alert-danger text-left">  
+          1. 请在 <strong>"付款说明"</strong> 注明您在本站的注册邮箱。
+          <br />
+          2. 付款成功后，我们将在一个工作日内将“脸熟”票加入您的账户中。
+          <br />
+          3. 请将邮箱中的"."用"#"替换，例如 no.reply@yaha.me 应该写为no#reply@yaha#me
+        </div>
+      </div>
+
+      <!-- join button -->
+      <button ng-hide="alreadyJoin" class="btn btn-primary fa fa-plus" ng-click="joinFirstMeet(firstMeetItem.id)"> {{'Join'|i18n}}</button>
+    </div>
+
+    <ul class="list-group" ng-if="alreadyJoin">
+      <li class="list-group-item">
+        <span class="fa fa-check"></span>
+        {{'sign up and join the first meet, your code is %s'|i18n:yourCode}}
+      </li>
+      <li class="list-group-item">
+        <div ng-if="!showStep(2)">
+          <span class="fa fa-check"></span>
+          {{'go to the station and meet with each other'|i18n}}
+        </div>
+        <div ng-if="showStep(2)">
+          2.&nbsp;
+          <a href="" ng-click="step2Detail = !step2Detail">{{'go to the station and meet with each other'|i18n}}</a>
+          <div ng-show="step2Detail">
+            <br />
+            <button class="btn btn-primary" ng-click="completeStep(2)"> {{'I have arrive the station'|i18n}}</button>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div ng-if="!showStep(3)">
+          <span class="fa fa-check"></span>
+          {{'take the photo for %s'|i18n:takePhotoOf}}
+        </div>
+        <div ng-if="showStep(3)">
+          3.&nbsp;
+          <a href="" ng-click="step3Detail = !step3Detail">{{'take the photo for %s'|i18n:takePhotoOf}}</a>
+          <div ng-show="step3Detail">
+            <br />
+            <button class="btn btn-primary" ng-click="completeStep(3)"> {{'I have take the photo'|i18n}}</button>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div ng-if="!showStep(4)">
+          <span class="fa fa-check"></span>
+          {{'upload the photo you just take for %s'|i18n:takePhotoOf}}
+        </div>
+        <div ng-if="showStep(4)">
+          4.&nbsp;
+          <a href="" ng-click="step4Detail = !step4Detail">{{'upload the photo you just take for %s'|i18n:takePhotoOf}}</a>
+          <div ng-show="step4Detail && !step4Done">
+            <br />
+            <yh-uploader class="btn btn-primary ladda-button fui-photo" field-name="photo"
+          action="{{uploadUrl}}" security-header-name="sid" security-header-value="{{sid}}" 
+          on-complete="uploadComplete">
+              {{'Upload'|i18n}}
+            </yh-uploader>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div ng-if="!showStep(5)">
+          <span class="fa fa-check"></span>
+          {{'give others a rate'|i18n}}
+        </div>
+        <div ng-if="showStep(5)">
+          5.&nbsp;
+          <a href="" ng-click="step5Detail = !step5Detail">{{'give others a rate'|i18n}}</a>
+          <div ng-show="step5Detail && !step5Done" class="clearfix">
+            <br />
+            <table class="table table-vertical-middle">
+              <thead>
+                <tr> 
+                  <th></th>
+                  <th>{{'Rate'|i18n}}</th>
+                  <th>{{'Impression'|i18n}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="member in firstMeetItem.members" ng-if="member.id != uid">
+                  <td>
+                    <img ng-src="{{yh.avatarUrl(member.id)}}" class="avatar-30 img-circle" />
+                    &nbsp; {{member.displayName}}
+                  </td>
+                  <td> 
+                    <rating value="member.rate" max="10"></rating>
+                    {{member.rate}}
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" ng-model="member.tag" placeholder="{{'some tag: funny, handsome, cute'|i18n}}" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div ng-if="!showStep(6)">
+          <span class="fa fa-check"></span>
+          {{'done and gone to join another meet'|i18n}}
+        </div>
+        <div ng-if="showStep(6)">
+          6.&nbsp;
+          <a href="" ng-click="step6Detail = !step6Detail">{{'done and gone to join another meet'|i18n}}</a>
+          <div ng-show="step6Detail && !step6Done">
+            <br />
+            <button class="btn btn-primary"> {{'go and join next meet'|i18n}}</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div ng-show="pagerError == 'noMore'" class="alert alert-warning text-center">
+    <p>{{'It is already the last group.'|i18n}}</p>
+    <p>
+      <button class="btn btn-danger fa fa-edit"> {{'Launch a new First Meet group'|i18n}}</button>
+    </p>
+  </div>
+  <div ng-show="pagerError == 'alreadyFirst'" class="alert alert-warning text-center">
+    <p>{{'It is already the first group.'|i18n}}</p>
+  </div>
+
+  <div class="text-center">  
+    <ul class="pager">
+      <li class="previous" >
+        <a href="" ng-click="queryFirstMeetItem( firstMeetItemIndex - 1 )">
+          <span class="fui-arrow-left"></span>
+          <span>{{'Prev Group'|i18n}}</span>
+        </a>
+      </li>
+      <li class="next">
+        <a href="" ng-click="queryFirstMeetItem( firstMeetItemIndex + 1 )">
+          <span>{{'Next Group'|i18n}}</span>
+          <span class="fui-arrow-right"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div ng-show="firstMeetItemZero" class="alert alert-danger text-center">
+  <p>{{firstMeet.city + firstMeet.day.label + firstMeet.time + firstMeet.station}}</p>
+  <p>{{'Do not have any First Meet group.'|i18n}}</p>
+  <p>
+    <a ui-sref="love.firstMeet.new" class="btn btn-danger fa fa-edit"> {{'Launch a new First Meet group'|i18n}}</a>
+  </p>
+</div>

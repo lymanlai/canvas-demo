@@ -1,0 +1,30 @@
+<form class="form-horizontal" name="form" novalidate ng-submit="submit()" ui-keydown="{'ctrl-enter':'submit()'}">
+  <div class="form-group ng-class:{'has-error':form.title.$invalid}">
+    <label class="col-sm-2 control-label" for="title">{{'Title'|i18n}}</label>
+    <div class="col-sm-6">
+      <input class="form-control" type="text" id="title" name="title" ng-model="formData.title" placeholder="{{'Meet @place for chat'|i18n}}"  autofocus required />
+      <span class="help-block" ng-show="form.title.$dirty && form.title.$error.required">{{'Please input the title'|i18n}}</span>
+    </div>
+  </div>
+  <div class="form-group ng-class:{'has-error':form.hangoutDate.$dirty && form.hangoutDate.$invalid}">
+    <label class="col-sm-2 control-label" for="hangoutDate">{{'Hangout Date'|i18n}}</label>
+    <div class="col-sm-6">
+      <input class="form-control" type="text" id="hangoutDate" name="hangoutDate" ng-model="formData.hangoutDate" placeholder="{{'2013-11-11'|i18n}}"  required yh-date />
+      <span class="help-block" ng-show="form.hangoutDate.$dirty && form.hangoutDate.$error.required">{{'Please input the Hangout Date'|i18n}}</span>
+      <span class="help-block" ng-show="form.hangoutDate.$dirty && form.hangoutDate.$error.yhDate">{{'Please input validate Date (YYYY-MM-DD)'|i18n}}</span>
+    </div>
+  </div>
+  <div class="form-group ng-class:{'has-error':form.hangoutStartTime.$dirty && form.hangoutStartTime.$invalid}">
+    <label class="col-sm-2 control-label" for="hangoutStartTime">{{'Hangout Start Time'|i18n}}</label>
+    <div class="col-sm-6">
+      <input class="form-control" type="text" id="hangoutStartTime" name="hangoutStartTime" ng-model="formData.hangoutStartTime" placeholder="{{'18:00'|i18n}}"  required yh-time />
+      <span class="help-block" ng-show="form.hangoutStartTime.$dirty && form.hangoutStartTime.$error.required">{{'Please input the Hangout Start Time'|i18n}}</span>
+      <span class="help-block" ng-show="form.hangoutStartTime.$dirty && form.hangoutStartTime.$error.yhTime">{{'Please input validate Time (HH:mm)'|i18n}}</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">Save</button> (Ctrl+Enter)
+    </div>
+  </div>
+</form>

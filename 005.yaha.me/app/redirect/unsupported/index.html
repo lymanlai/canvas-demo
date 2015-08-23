@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unsupported or Outdated Browser 不支持或过时的浏览器</title>
+  <link rel="stylesheet" href="./assets/css/messages.css" />
+  <style type="text/css">#choices #download-ie{ display: none }</style>
+  <!--[if WindowsEdition]>
+  <style type="text/css">#choices #download-ie{ display: block } #choices #download-safari{ display: none }</style>
+  <![endif]-->
+</head>
+<body>
+<div id="wrap">
+  <div id="header">
+    <h1>Your Web Browser is not Supported <br /> 您的浏览器不被支持</h1>
+  </div>
+  <div id="content">
+    <div id="inner">
+      <h2>It seems you're using an unsupported or outdated browser. <br /> 似乎您在使用一个不支持或者过时的浏览器。</h2>
+      <div class="separator"></div>
+      <p>We suggest you upgrade to one of the following browsers: <br /> 我们建议您升级到以下任意一款浏览器：</p>
+      <div id="choices">
+        <!-- NOTE: WE ONLY SUGGEST INTERNET EXPLORER FOR WINDOWS 6.0 AND NEWER -->
+        <table align="center" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td><a id="download-chrome" title="Chrome" href="http://www.google.com/chrome/">Google Chrome <br /> 谷歌浏览器</a></td>
+            <td><a id="download-firefox" title="Firefox" href="http://www.mozilla.org/firefox/">Mozilla Firefox <br /> 火狐浏览器</a></td>
+            <td><a id="download-safari" title="Safari" href="http://www.apple.com/safari/">Apple Safari <br /> 苹果浏览器</a></td>
+            <td><a id="download-ie" title="Internet Explorer" href="http://go.microsoft.com/fwlink/?LinkID=166930">Internet Explorer</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="bottom"></div>
+  </div>
+</div>
+<script type="text/javascript">if (navigator.platform.slice(0, 3) == 'Win') document.getElementById('download-safari').href = 'http://appldnld.apple.com/Safari5/041-5487.20120509.INU8B/SafariSetup.exe'</script>
+<script>if(true){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-41049717-1', 'yaha.me');ga('send', 'pageview');}</script>
+</body>
+</html>

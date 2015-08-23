@@ -1,0 +1,28 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      {{'Skills'|i18n}}
+    </h3>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>{{'Skill Name'|i18n}}</th>
+        <th>{{'Skill Level'|i18n}}</th>
+        <th>{{'Start Use Time'|i18n}}</th>
+        <th ng-if="isEditAbled"></th>
+      </tr>
+      <tr ng-repeat="skill in item.skillList track by $index">
+        <td><span editable-text="skill.skillName">{{skill.skillName}}</span></td>
+        <td>
+          <rating value="skill.skillLevel" max="max" readonly="!isEditAbled"></rating>
+        </td>
+        <td><span editable-text="skill.startUseTime">{{skill.startUseTime}}</span></td>
+        <td ng-if="isEditAbled"><a href="" ng-click="deleteFromArray(item.skillList, $index)" class="label label-danger">{{'Delete'|i18n}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="panel-footer" ng-if="isEditAbled">
+    <button ng-click="item.skillList.push(tpl.skill)" class="btn btn-primary">{{'Add'|i18n}}</button>
+  </div>
+</div>

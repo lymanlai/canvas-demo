@@ -1,0 +1,27 @@
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{'Project Experience'|i18n}}</h3>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item clearfix" ng-repeat="projectExperience in item.projectExperienceList track by $index">
+      <div class="clickable" ng-hide="currentShowProjectExperienceId == $index" ng-click="toggleShowProjectExperience($index)">
+        <a href="">{{projectExperience.title || notSetupYet}}</a>
+        <span class="pull-right">{{projectExperience.timeSpan}}</span>
+      </div>
+      <div class="detail" ng-show="currentShowProjectExperienceId == $index">
+        <div class="clearfix">
+          <span editable-text="projectExperience.title">{{projectExperience.title || notSetupYet}}</span>
+          <span class="pull-right" editable-text="projectExperience.timeSpan">{{projectExperience.timeSpan}}</span>
+        </div>
+        <br />
+        <div editable-textarea="projectExperience.detail" e-cols="55" ng-bind-html="projectExperience.detail | nl2br">
+        </div>
+        <br />
+        <a ng-click="deleteFromArray(item.projectExperienceList, $index)" href="" class="btn btn-danger pull-right" ng-if="isEditAbled">{{'Delete'|i18n}}</a>
+      </div>
+    </li>
+  </ul>
+  <div class="panel-footer" ng-if="isEditAbled">
+    <button ng-click="listAdd('projectExperienceList', tpl.projectExperience)" class="btn btn-primary">{{'Add'|i18n}}</button>
+  </div>
+</div>

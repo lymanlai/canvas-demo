@@ -1,0 +1,28 @@
+<yh-uploader class="btn btn-primary ladda-button pull-right " 
+  field-name="file"
+  set-height="{{height}}"
+  action="{{uploadActionUrl}}" 
+  security-header-name="sid" 
+  security-header-value="{{sid}}" 
+  on-complete="updatePhoto" 
+  ng-if="isEditAbled"
+  style="margin-bottom:-64px;"
+> 
+  <i class="fa fa-picture-o"></i>     
+</yh-uploader>
+<div class="jumbotron imgLiquid img-rounded">
+  <img ng-src="{{photoUrl}}"/>
+  <h1 editable-textarea="item.title" style="color:{{item.color || '#16a085'}}" ng-bind-html="item.title | nl2br" e-cols="55" onbeforesave="isEmpty($data)"></h1>
+  <h5 editable-textarea="item.subTitle" style="color:{{item.color || '#16a085'}}" ng-bind-html="item.subTitle | nl2br" e-cols="55" onbeforesave="isEmpty($data)"></h5>
+  </button>
+</div>
+
+<a ui-sref="setting.profile" ng-if="isEditAbled">
+<img class="avatar-60 img-rounded pull-left" ng-src="{{avatarUrl}}" style="margin-top:-90px;" />
+</a>
+<img ng-if="!isEditAbled" class="avatar-60 img-rounded pull-left" ng-src="{{avatarUrl}}" style="margin-top:-90px;" />
+
+<a href="" ng-if="isEditAbled" class="btn btn-inverse fa fa-magic pull-right" style="margin-top:-65px;" colorpicker colorpicker-position="left" ng-model="item.color"></a>
+
+<ng-include ng-if="isEditAbled || privateList.length > 0" src="yh.path('todo/views/itemUser-postList-private.html')"></ng-include>
+<ng-include ng-if="isEditAbled || publicList.length > 0" src="yh.path('todo/views/itemUser-postList-public.html')"></ng-include>

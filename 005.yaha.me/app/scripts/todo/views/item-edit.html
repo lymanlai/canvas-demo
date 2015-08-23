@@ -1,0 +1,46 @@
+<table class="table table-hover">
+  <thead>
+    <tr ng-class="{warning: titleFocus}"
+        ng-mouseover="titleFocus = true" 
+        ng-mouseout="titleFocus = false; setFocus(null)">
+      <th width="30px">
+        &nbsp;
+      </th>
+      <th>        
+        <div contenteditable ng-model="todoData.title" yh-focus="titleFocus" yh-focus-position="'end'"></div>
+      </th>
+      <th width="50px"></th>
+      <th width="1px">
+        <a ng-if="todoData.parentId" href="" ng-click="goToParentList(todoData.parentId)" class="fa fa-chevron-left"></a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in items track by $index" 
+        ng-class="{warning: isFocus($index)}"
+        ng-mouseover="setFocus($index, 'end')"
+        ng-hide="item.isHide">
+      <td>
+        <a href="" ng-click="item.isDone = !item.isDone" ng-if="item.isDone || isFocus($index)" class="fa" ng-class="{'fa-check': item.isDone, 'fa-square': !item.isDone}"></a>
+      </td>
+      <td>
+        <div contenteditable ng-model="item.title"
+          ng-click="setFocus($index, focusPosition)"          
+          yh-focus="isFocus($index)"
+          yh-focus-position="focusPosition"  
+          ng-style="{'padding-left':item.indent * 20 + 'px'}"     
+          ui-keydown="{'up':'up($event, $index)', 'down':'down($event, $index)', 'tab':'indent($event, $index)', 'shift-tab':'unIndent($event, $index)', 'shift-enter':'shiftEnter($event, $index)','enter':'enter($event, $index)','delete':'deleteItem($event, $index)','backspace':'backspaceItem($event, $index)','shift-backspace':'backspaceItem($event, $index)','ctrl-up':'moveUp($event, $index)','ctrl-down':'moveDown($event, $index)'}">{{item.title}}</div>
+      </td>
+      <td class="text-right">
+        <div ng-show="isFocus($index) && (item.title !== '' || item.childListId)">
+          <a href="" ng-click="timerModalForm($index)" class="fa fa-clock-o"> {{item.logCount}}</a>
+        </div>
+      </td>
+      <td class="text-right">
+        <span ng-show="isFocus($index) && (item.title !== '' || item.childListId)">
+          <a href="" ng-click="goToChildList($index)" class="fa fa-chevron-right ng-class:{'color-alizarin': !item.childListId}" tooltip="{{item.childListId ? 'Go into child node' : 'Create new child node'|i18n}}" tooltip-placement="right" tooltip-append-to-body="true"></a>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

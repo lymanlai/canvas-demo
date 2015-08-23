@@ -1,0 +1,186 @@
+<!doctype html>
+<html class="no-js" ng-app="yahaApp">
+  <head>
+    <meta charset="utf-8">
+    <!--[if lt IE 9]>
+        <meta HTTP-EQUIV="REFRESH" content="0; url=/redirect/unsupported/index.html">
+    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>YaHa.Me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- build:css /styles/lib.css -->
+    <link href="/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/components/flat-ui-official/css/flat-ui.css" rel="stylesheet">
+    <link href="/components/Font-Awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/components/nprogress/nprogress.css" rel="stylesheet">
+    <link href="/components/Ladda/dist/ladda-themeless.min.css" rel="stylesheet">
+    <link href="/components/animate.css/animate.css" rel="stylesheet">
+    <link href="/components/angular-bootstrap-colorpicker/css/colorpicker.css" rel="stylesheet">
+    <link href="/components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+    <!-- endbuild -->
+    <!-- build:css /styles/main.css -->
+    <link href="/styles/share.css" rel="stylesheet">
+    <link href="/styles/animate.css" rel="stylesheet">
+    <link href="/styles/app.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <div class="container-narrow loading text-center" ng-hide="loaded">
+      <div class="jumbotron">
+        <h1>
+          <a href="/#" style="color: #16a085; font-size: 72px;">YaHa.Me</a>
+        </h1>
+        <br />
+        <h4>
+          <img src="/images/loading.gif" width="54px" height="55px" /> &nbsp;&nbsp;&nbsp;&nbsp;Loading...
+        </h4>
+      </div>
+    </div>
+
+    <div class="clearfix container-narrow hide animated ng-class:{'bounceInDown show': loaded}">
+      <div class="toggle-wrap" ng-hide="headerShow">
+        <button id="menu-toggle" type="button" class="btn btn-navbar btn-primary" ng-click="menuToggle()" >Y</button>
+      </div>
+      <div class="navbar navbar-inverse" id="top-nav" ng-hide="!headerShow">
+          <ul class="nav navbar-left">
+            <li>
+              <a href=""><i class="fa fa-list"></i></a>
+              <ul>
+                <li ng-class="{ active: $state.is('yaha.list') }">
+                  <a ui-sref="yaha.list">{{'Discover'|i18n}}</a>
+                </li>
+                <li ng-if="hasPermission('user')" ng-class="{ active: $state.is('yaha.my') }">
+                  <a ui-sref="yaha.my">{{'My'|i18n}}</a>
+                </li>
+                <li ng-class="{ active: $state.is('feedback') }">
+                  <a ui-sref="feedback">{{'Feedback'|i18n}}</a>
+                </li>
+                <li ng-class="{ active: $state.is('about') }">
+                  <a ui-sref="about">{{'About'|i18n}}</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="" ><i class="fa fa-user"></i></a>
+              <ul>
+                <li><a ui-sref="language">{{'Language'|i18n}}</a></li>
+                <li ng-if="hasPermission('anon')" ng-class="{ active: $state.is('login') }"><a ui-sref="login">{{'Login'|i18n}}</a></li>
+                <li ng-if="hasPermission('anon')" ng-class="{ active: $state.is('signup') }"><a ui-sref="signup">{{'Signup'|i18n}}</a></li>
+
+                <li ng-if="hasPermission('user')" ng-class="{ active: $state.includes('setting') }"><a ui-sref="setting.profile">{{'Setting'|i18n}}</a></li>
+                <li ng-if="hasPermission('user')" ng-class="{ active: $state.is('logout') }"><a ui-sref="logout">{{'Logout'|i18n}}</a></li>
+              </ul>
+            </li>
+            <li><a href="" ng-click="menuToggle()"><i class="fa fa-chevron-up"></i></a></li>
+          </ul>
+          <ng-include src="menuUrl" />
+      </div> <!-- /navbar -->
+
+      <div ui-view ng-animate="{enter:'fade-enter'}" id="main-content"></div>
+
+    </div>
+
+    <!-- build:js /scripts/vendors.js -->
+    <script src="/components/jquery/jquery.min.js"></script>
+    <script src="/components/nprogress/nprogress.js"></script>
+    <script src="/components/moment/moment.js"></script>
+    <script src="/components/imgLiquid/js/imgLiquid.js"></script>
+    <script src="/components/angular/angular.js"></script>
+    <script src="/components/angular-touch/angular-touch.js"></script>
+    <script src="/components/angular-gestures/gestures.js"></script>
+    <script src="/components/angularytics/dist/angularytics.js"></script>
+    <script src="/components/angular-animate/angular-animate.js"></script>
+    <script src="/components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="/components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/components/angularjs-i18n/lib/sprintf/sprintf.js"></script>
+    <script src="/components/angularjs-i18n/localization.js"></script>
+    <script src="/components/angular-moment/angular-moment.js"></script>
+    <script src="/components/angular-elastic/elastic.js"></script>
+    <script src="/components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="/components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+    <script src="/components/angular-timer/dist/angular-timer.js"></script>
+
+    <script src="/components/angular-bootstrap/src/position/position.js"></script>
+    <script src="/components/angular-bootstrap/src/bindHtml/bindHtml.js"></script>
+    <script src="/components/angular-bootstrap/src/transition/transition.js"></script>
+    <script src="/components/angular-bootstrap/src/buttons/buttons.js"></script>
+    <script src="/components/angular-bootstrap/src/alert/alert.js"></script>
+    <script src="/components/angular-bootstrap/src/modal/modal.js"></script>
+    <script src="/components/angular-bootstrap/src/tabs/tabs.js"></script>
+    <script src="/components/angular-bootstrap/src/rating/rating.js"></script>
+    <script src="/components/angular-bootstrap/src/collapse/collapse.js"></script>
+    <script src="/components/angular-bootstrap/src/dropdownToggle/dropdownToggle.js"></script>
+    <script src="/components/angular-bootstrap/src/progressbar/progressbar.js"></script>
+    <script src="/components/angular-bootstrap/src/tooltip/tooltip.js"></script>
+
+    <script src="/components/angular-ui-utils/modules/keypress/keypress.js"></script>
+
+    <script src="/components/Ladda/dist/spin.min.js"></script>
+    <script src="/components/Ladda/dist/ladda.min.js"></script>
+    <!-- endbuild -->
+
+<script type="text/javascript">
+//dev
+var API = 'http://localhost:8081/'
+  , STATIC_HOST = 'http://localhost:8081/static/'
+  , IS_ONLINE = false
+;
+
+//online
+if ( /yaha.me$/.test(location.hostname) ) {
+  var API = 'http://v2.api.yaha.me/'
+    , STATIC_HOST = 'http://static.yaha.me/'
+    , IS_ONLINE = true
+  ;
+}
+</script>
+
+    <!-- build:js /scripts/lib.js -->
+    <script src="/scripts/boot.js"></script>
+    <script src="/scripts/yh.js"></script>
+    <script src="/scripts/yh/loadingService.js"></script>
+    <script src="/scripts/yh/onStartInterceptor.js"></script>
+    <script src="/scripts/yh/onCompleteInterceptor.js"></script>
+    <script src="/scripts/yh/contenteditable.js"></script>
+    <script src="/scripts/yh/yhCache.js"></script>
+    <script src="/scripts/yh/yhAlert.js"></script>
+    <script src="/scripts/yh/yhModal.js"></script>
+    <script src="/scripts/yh/yhUnique.js"></script>
+    <script src="/scripts/yh/yhDate.js"></script>
+    <script src="/scripts/yh/yhTime.js"></script>
+    <script src="/scripts/yh/yhContentLink.js"></script>
+    <script src="/scripts/yh/yhFocus.js"></script>
+    <script src="/scripts/yh/nl2br.js"></script>
+    <script src="/scripts/yh/itemFocus.js"></script>
+    <script src="/scripts/yh/yhLimitStringLength.js"></script>
+    <script src="/scripts/yh/itemBlur.js"></script>
+    <script src="/scripts/yh/yhFocusByOver.js"></script>
+    <script src="/scripts/yh/yhMatch.js"></script>
+    <script src="/scripts/yh/yhNowYear.js"></script>
+    <script src="/scripts/yh/tagsList.js"></script>
+    <script src="/scripts/yh/yhReply.js"></script>
+    <script src="/scripts/yh/yhUploader.js"></script>
+    <script src="/scripts/yh/dropdownSelect.js"></script>
+    <script src="/scripts/user/main.js"></script>
+    <script src="/scripts/user/login.js"></script>
+    <script src="/scripts/user/signup.js"></script>
+    <script src="/scripts/user/activeAccount.js"></script>
+    <script src="/scripts/user/lostPassword.js"></script>
+    <script src="/scripts/user/resetPassword.js"></script>
+    <script src="/scripts/user/logout.js"></script>
+    <script src="/scripts/setting/main.js"></script>
+    <script src="/scripts/setting/profile.js"></script>
+    <script src="/scripts/setting/account.js"></script>
+    <!-- endbuild -->
+    <!-- build:js /scripts/yaha.js -->
+    <script src="scripts/yaha/main.js"></script>
+    <script src="/scripts/yaha/list.js"></script>
+    <script src="/scripts/yaha/item.js"></script>
+    <script src="/scripts/yaha/add.js"></script>
+    <script src="/scripts/yaha/itemUser.js"></script>
+    <!-- endbuild -->
+
+<script>if(IS_ONLINE){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-41049717-1', 'yaha.me');ga('send', 'pageview');}</script>
+  </body>
+</html>

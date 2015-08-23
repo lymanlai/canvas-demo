@@ -1,0 +1,36 @@
+<form class="form-horizontal" name="form" novalidate ng-submit="submit()" ui-keydown="{'ctrl-enter':'submit()'}">
+  <div class="form-group ng-class:{'has-error':form.title.$invalid}">
+    <label class="col-sm-2 control-label" for="title">{{'Title'|i18n}}</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" id="title" name="title" ng-model="formData.title" placeholder="{{'Title'|i18n}}"  autofocus required />
+      <span class="help-block" ng-show="form.title.$dirty && form.title.$error.required">{{'Please input the title'|i18n}}</span>
+    </div>
+  </div>
+  <div class="form-group ng-class:{'has-error':form.city.$dirty && form.city.$invalid}">
+    <label class="col-sm-2 control-label" for="city">{{'City'|i18n}}</label>
+    <div class="col-sm-9">
+      <input dropdown-select ng-model="formData.city" name="city" id="city" placeholder="{{'City'|i18n}}" select-list="cityList" required />
+      <span class="help-block" ng-show="form.city.$dirty && form.city.$error.required">{{'Please select the city'|i18n}}</span>
+    </div>    
+  </div>      
+  <div class="form-group ng-class:{'has-error':form.tags.$dirty && form.tags.$invalid}">
+    <label class="col-sm-2 control-label" for="tags">{{'Tags'|i18n}}</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" id="tags" name="tags" 
+        ng-model="formData.tags" tags-list="tagsList" placeholder="{{'Tags'|i18n}}" ng-click="checkValidate('city');" required />
+      <span class="help-block" ng-show="form.tags.$dirty && form.tags.$error.required">{{'Please input the tags'|i18n}}</span>
+    </div>
+  </div>
+  <div class="form-group ng-class:{'has-error':form.content.$dirty && form.content.$invalid}">
+    <label class="col-sm-2 control-label" for="content">{{'Content'|i18n}}</label>
+    <div class="col-sm-9">
+      <textarea class="form-control" ng-click="checkValidate('city');checkValidate('tags');" type="text" id="content" name="content" ng-model="formData.content" placeholder="{{'Content'|i18n}}"  required />
+      <span class="help-block" ng-show="form.content.$dirty && form.content.$error.required">{{'Please input the content'|i18n}}</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">{{'Save'|i18n}}</button> (Ctrl+Enter)
+    </div>
+  </div>
+</form>

@@ -1,0 +1,17 @@
+<tabset>
+  <tab>
+    <tab-heading> <i class="fa fa-comment"> ({{listA.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="listA" reply-user-link="replyUserLink" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameA"/>
+  </tab>
+  <tab>
+    <tab-heading> <i class="fa fa-thumbs-up"> ({{thumbsUpList.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="thumbsUpList" reply-user-link="replyUserLink" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameThumbsUp"/>
+  </tab>
+  <tab>
+    <tab-heading> <i class="fa fa-thumbs-down"> ({{thumbsDownList.length || 0}})</i> </tab-heading>
+    <br />
+    <yh-reply item-list="thumbsDownList" reply-user-link="replyUserLink" on-get-children="onGetChildren" on-add="onAdd" on-add-child="onAddChild" on-thumbs-up="onThumbsUp" on-thumbs-down="onThumbsDown" type="typeNameThumbsDown"/>
+  </tab>
+</tabset>
