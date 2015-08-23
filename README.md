@@ -1,13 +1,7 @@
 # canvas-demo
 
-# TODO
-
-2.项目
-请展示几个使用angularjs的项目的源代码，放在github或者bitbucket上。
-
-
 # Finally
-
+<pre>
 1. 编程：
 1). 请基于WebGL或OpenGL实现以下功能（Android or iPhone or Windows or in Browser or in WeChat都可以）
   a. 创建一个640x640的canvas，背影颜色为#FFFFFF
@@ -24,3 +18,4 @@
 
 2.项目
 请展示几个使用angularjs的项目的源代码，放在github或者bitbucket上。
+</pre>
