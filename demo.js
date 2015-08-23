@@ -16,6 +16,7 @@
         drawScreen: drawScreen,
         drawBackground: drawBackground,
         drawCircle: drawCircle,
+        clipSquare: clipSquare,
         drawSquare: drawSquare,
         mouseDown: mouseDown,
         mouseMove: mouseMove,
@@ -38,13 +39,27 @@
         Demo.set('context', canvas.getContext('2d'));
 
         var canvasWidth = canvas.width;
-        Demo.set('circle', {
+        var canvasHeight = canvas.height;
+
+        var circle = {
             x: canvasWidth / 2,
             y: canvasWidth / 2,
             radius: canvasWidth / 4,
             fillStyle: '#555',
             strokeStyle: '#222'
-        });
+        };
+        Demo.set('circle', circle);
+
+        var width = 500;
+        var height = 500;
+        var square = {
+            x: (canvasWidth - width) / 2,
+            y: (canvasHeight - height) / 2,
+            width: width,
+            height: height,
+            fillStyle: '#aaa'
+        };
+        Demo.set('square', square);
 
         return Demo;
     }
@@ -52,6 +67,7 @@
     function drawScreen() {
         Demo.drawBackground();
         Demo.drawSquare();
+        Demo.clipSquare();
         Demo.drawCircle();
     }
 
@@ -82,15 +98,19 @@
         var canvas = Demo.get('canvas');
         var context = Demo.get('context');
 
-        var canvasWidth = canvas.width;
-        var canvasHeight = canvas.height;
-        var width = 500;
-        var height = 500;
-        var x = (canvasWidth - width) / 2;
-        var y = (canvasHeight - height) / 2;
+        var square = Demo.get('square');
 
-        context.fillStyle = '#aaa';
-        context.fillRect(x, y, width, height);
+        context.fillStyle = square.fillStyle;
+        context.fillRect(square.x, square.y, square.width, square.height);
+        context.closePath();
+    }
+
+    function clipSquare() {
+        var context = Demo.get('context');
+        var square = Demo.get('square');
+
+        context.rect(square.x, square.y, square.width, square.height);
+        context.clip();
     }
 
     function mouseDown(event) {
