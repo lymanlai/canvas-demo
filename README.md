@@ -2,9 +2,6 @@
 
 # TODO
 
-3). 在2)的基础上实现以下要求：
-  b. 为这个库创建github pages，要求pages的首页能够完成测试1),和2).的功能（如果是基于WebGL实现的话）
-
 2.项目
 请展示几个使用angularjs的项目的源代码，放在github或者bitbucket上。
 
