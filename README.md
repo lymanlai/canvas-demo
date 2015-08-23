@@ -1,6 +1,9 @@
 # canvas-demo
 
 # Finally
+
+  http://lymanlai.github.io/canvas-demo/
+
 <pre>
 1. 编程：
 1). 请基于WebGL或OpenGL实现以下功能（Android or iPhone or Windows or in Browser or in WeChat都可以）
